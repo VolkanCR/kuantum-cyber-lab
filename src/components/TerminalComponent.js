@@ -31,6 +31,7 @@ export class TerminalComponent {
         this.hintToggleBtnEl = document.getElementById("hintToggleBtn");
         this.hintBoxEl = document.getElementById("hintBox");
         this.optionsContainerEl = document.getElementById("optionsContainer");
+        this.takeawayBoxEl = document.getElementById("takeawayBox");
         this.statusLineEl = document.getElementById("statusLine");
 
         /** @type {import('../models/Task.js').Task|null} */
@@ -52,6 +53,7 @@ export class TerminalComponent {
             !this.hintToggleBtnEl ||
             !this.hintBoxEl ||
             !this.optionsContainerEl ||
+            !this.takeawayBoxEl ||
             !this.statusLineEl
         ) {
             throw new Error("[TerminalComponent] Gerekli etkileşim DOM elemanları bulunamadı.");
@@ -71,6 +73,7 @@ export class TerminalComponent {
 
         this.eventBus.subscribe(APP_CONFIG.EVENTS.SESSION_RESET, () => {
             this.closeHint();
+            this.hideTakeaway();
             this.setConsoleStatus("Sistem sıfırlandı. Seçim bekleniyor...", "");
         });
     }
@@ -100,11 +103,35 @@ export class TerminalComponent {
     }
 
     /**
+     * Teknik çıkarım notunu gösterir.
+     * @param {string} takeawayText
+     */
+    showTakeaway(takeawayText) {
+        this.takeawayBoxEl.innerHTML = `
+            <div class="takeaway-header">
+                <span aria-hidden="true">✓</span>
+                <span>TEKNİK ÇIKARIM VE ALINAN ÖNLEM</span>
+            </div>
+            <div class="takeaway-body">${takeawayText}</div>
+        `;
+        this.takeawayBoxEl.classList.add("visible");
+    }
+
+    /**
+     * Teknik çıkarım notunu gizler.
+     */
+    hideTakeaway() {
+        this.takeawayBoxEl.innerHTML = "";
+        this.takeawayBoxEl.classList.remove("visible");
+    }
+
+    /**
      * Soru ve seçenekleri ekrana basar.
      * @param {import('../models/Task.js').Task} task
      */
     renderInteractiveArea(task) {
         this.closeHint();
+        this.hideTakeaway();
         this.isProcessing = false;
 
         this.questionTextEl.textContent = task.question;
@@ -134,6 +161,7 @@ export class TerminalComponent {
 
         if (isTaskCompleted) {
             this.setConsoleStatus("— Doğrulandı. Modül tamamlandı.", "success");
+            this.showTakeaway(task.takeaway);
         } else {
             this.setConsoleStatus("Seçenek bekleniyor...", "");
         }
@@ -159,11 +187,12 @@ export class TerminalComponent {
             buttonEl.classList.add("correct");
             this.disableAllOptionButtons();
             this.setConsoleStatus(evaluation.message, "success");
+            this.showTakeaway(this.currentTask.takeaway);
 
             window.setTimeout(() => {
                 this.isProcessing = false;
                 this.advanceToNextAvailableTask();
-            }, APP_CONFIG.TIMING.SUCCESS_ADVANCE_DELAY_MS);
+            }, APP_CONFIG.TIMING.SUCCESS_ADVANCE_DELAY_MS + 400);
 
         } else {
             buttonEl.classList.add("wrong");

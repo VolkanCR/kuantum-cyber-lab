@@ -21,5 +21,6 @@ export const scenario05 = {
     hint: "Yerel ağın dış dünyaya açıldığı ve yönlendiricinin çıkış rotası olarak tanımlanan tek çıkış kapısıdır.",
     points: 20,
     diagram: "assets/diagrams/05-gateway-perimeter-layout.svg",
-    diagramCaption: "PERİMETRE TOPOLOJİSİ: DEFAULT GATEWAY MERKEZİ KONUMLANDIRMASI"
+    diagramCaption: "PERİMETRE TOPOLOJİSİ: DEFAULT GATEWAY MERKEZİ KONUMLANDIRMASI",
+    takeaway: "Cihazın 'Varsayılan Ağ Geçidi' (Default Gateway) olarak konuşlandırılması, tüm LAN segmentinin dış internet trafiğini tek bir fiziksel ve mantıksal denetim noktasından geçmeye zorunlu kılar."
 };

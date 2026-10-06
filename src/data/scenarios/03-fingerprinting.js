@@ -21,5 +21,6 @@ export const scenario03 = {
     hint: "Kullanıcı temsilcisi anlamına gelen temel HTTP başlığıdır.",
     points: 20,
     diagram: "assets/diagrams/03-client-fingerprint-vector.svg",
-    diagramCaption: "VEKTÖR ANALİZİ: HTTP BAŞLIK AYRIŞTIRMA VE KİMLİK DOĞRULAMA"
+    diagramCaption: "VEKTÖR ANALİZİ: HTTP BAŞLIK AYRIŞTIRMA VE KİMLİK DOĞRULAMA",
+    takeaway: "İstek başlığındaki 'User-Agent' alanı ve TLS parmak izi eşleşmesi, normal bir kullanıcı tarayıcısı ile arka planda çalışan Python/curl betiklerini birbirinden ayıran ilk sezgisel parametredir."
 };

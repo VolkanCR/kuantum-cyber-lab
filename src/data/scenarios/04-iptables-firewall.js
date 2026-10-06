@@ -21,5 +21,6 @@ export const scenario04 = {
     hint: "Paketi sıfır yanıtla yok sayarak karşı tarafı TCP zaman aşımına (timeout) uğratan eylemdir.",
     points: 20,
     diagram: "assets/diagrams/04-iptables-packet-flow.svg",
-    diagramCaption: "ÇEKİRDEK AKIŞI: NETFILTER INPUT ZİNCİRİ VE DROP HEDEFİ"
+    diagramCaption: "ÇEKİRDEK AKIŞI: NETFILTER INPUT ZİNCİRİ VE DROP HEDEFİ",
+    takeaway: "DROP kuralı, saldırgana 'Port Kapalı' (RST) mesajı göndermez. Karşı taraf bağlantı zaman aşımına (timeout) uğrayarak tarama hızını ciddi ölçüde kaybeder ve ağ varlığını teyit edemez."
 };

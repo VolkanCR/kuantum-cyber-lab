@@ -21,5 +21,6 @@ export const scenario02 = {
     hint: "İstemci hataları (4xx) sınıfında yer alır; kaynağın var olduğunu ancak erişim izninizin bulunmadığını belirtir.",
     points: 20,
     diagram: "assets/diagrams/02-waf-filtering-pipeline.svg",
-    diagramCaption: "PİPELINE ŞEMASI: WAF BAŞLIK DENETİMİ VE 403 ENGELLEME DÖNGÜSÜ"
+    diagramCaption: "PİPELINE ŞEMASI: WAF BAŞLIK DENETİMİ VE 403 ENGELLEME DÖNGÜSÜ",
+    takeaway: "WAF katmanında üretilen 403 Forbidden yanıtı, yetkisiz betiklerin sunucu CPU kaynaklarını ve arkadaki veritabanını tüketmeden perimetre hattında nötralize edildiğini doğrular."
 };

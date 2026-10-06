@@ -16,6 +16,7 @@ export class Task {
      * @param {number} data.points
      * @param {string} data.diagram
      * @param {string} data.diagramCaption
+     * @param {string} data.takeaway
      */
     constructor(data) {
         this.validate(data);
@@ -36,6 +37,7 @@ export class Task {
         this.points = Number(data.points);
         this.diagram = String(data.diagram).trim();
         this.diagramCaption = String(data.diagramCaption).trim();
+        this.takeaway = String(data.takeaway).trim();
 
         Object.freeze(this);
     }
@@ -89,6 +91,10 @@ export class Task {
 
         if (!data.diagramCaption || typeof data.diagramCaption !== "string") {
             throw new TypeError(`[Task.validate] Modül ${data.id}: Diyagram açıklaması zorunludur.`);
+        }
+
+        if (!data.takeaway || typeof data.takeaway !== "string") {
+            throw new TypeError(`[Task.validate] Modül ${data.id}: Teknik çıkarım (takeaway) alanı zorunludur.`);
         }
     }
 }

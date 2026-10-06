@@ -21,5 +21,6 @@ export const scenario01 = {
     hint: "Şifresiz Telnet protokolünden (23) bir önceki standart değerdir.",
     points: 20,
     diagram: "assets/diagrams/01-ssh-tunnel-topology.svg",
-    diagramCaption: "TOPOLOJİ ŞEMASI: GÜVENLİ SSH YÖNETİM TÜNELİ VE WAN İZOLASYONU"
+    diagramCaption: "TOPOLOJİ ŞEMASI: GÜVENLİ SSH YÖNETİM TÜNELİ VE WAN İZOLASYONU",
+    takeaway: "Varsayılan SSH portunun (22) WAN erişimine kısıtlanması, dış ağdan gelebilecek otomatik port taramalarını ve kaba kuvvet (brute-force) saldırı yüzeyini tamamen ortadan kaldırır."
 };

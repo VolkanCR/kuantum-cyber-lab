@@ -27,6 +27,7 @@ export class SidebarComponent {
         this.scoreDisplayEl = document.getElementById("scoreDisplay");
         this.totalScoreDisplayEl = document.getElementById("totalScoreDisplay");
         this.resetBtnEl = document.getElementById("resetBtn");
+        this.progressBarEl = document.getElementById("globalProgressBar");
 
         this.assertDomIntegrity();
         this.init();
@@ -86,7 +87,7 @@ export class SidebarComponent {
     }
 
     /**
-     * Modül listesini anlık duruma göre yeniden çizer.
+     * Modül listesini ve global ilerleme çubuğunu anlık duruma göre yeniden çizer.
      */
     render() {
         const state = this.stateManager.getState();
@@ -121,6 +122,7 @@ export class SidebarComponent {
         });
 
         this.updateScore(state.score);
+        this.updateProgressBar(state.completedTaskIds.length);
     }
 
     /**
@@ -129,5 +131,16 @@ export class SidebarComponent {
      */
     updateScore(score) {
         this.scoreDisplayEl.textContent = String(score);
+    }
+
+    /**
+     * En üstteki 2px ilerleme ekseninin genişliğini günceller.
+     * @param {number} completedCount
+     */
+    updateProgressBar(completedCount) {
+        if (!this.progressBarEl) return;
+        const percentage = Math.round((completedCount / this.tasks.length) * 100);
+        this.progressBarEl.style.width = `${percentage}%`;
+        this.progressBarEl.setAttribute("aria-valuenow", String(percentage));
     }
 }

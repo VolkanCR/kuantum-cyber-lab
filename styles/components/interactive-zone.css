@@ -1,3 +1,15 @@
+/* --- Global Üst İlerleme Çubuğu (1px Mimari Eksen) --- */
+.global-progress-bar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 2px;
+    width: 0%;
+    background-color: var(--color-line-dark);
+    z-index: 1000;
+    transition: width var(--transition-smooth);
+}
+
 /* --- İnteraktif Değerlendirme Bölgesi --- */
 .interactive-zone {
     border-top: 1px solid var(--color-line);
@@ -111,6 +123,52 @@
 
 .option-node:disabled {
     cursor: default;
+}
+
+/* --- Doğrulama Sonrası Teknik Çıkarım Notu --- */
+.takeaway-card {
+    display: none;
+    padding: var(--space-4);
+    background-color: var(--color-bg-secondary);
+    border: 1px solid var(--color-line);
+    border-left: 3px solid var(--color-line-dark);
+    font-size: var(--text-sm);
+    line-height: var(--leading-normal);
+    animation: fadeInTakeaway var(--transition-base);
+}
+
+.takeaway-card.visible {
+    display: block;
+}
+
+.takeaway-header {
+    display: flex;
+    align-items: center;
+    gap: var(--space-2);
+    font-family: var(--font-mono);
+    font-size: var(--text-2xs);
+    font-weight: 700;
+    letter-spacing: var(--tracking-wider);
+    color: var(--color-text-main);
+    text-transform: uppercase;
+    margin-bottom: var(--space-2);
+}
+
+.takeaway-body {
+    color: var(--color-text-secondary);
+    font-size: var(--text-sm);
+    line-height: var(--leading-normal);
+}
+
+@keyframes fadeInTakeaway {
+    from {
+        opacity: 0;
+        transform: translateY(4px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
 
 /* --- Terminal / Konsol Geri Bildirim Satırı --- */

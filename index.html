@@ -4,8 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="description" content="Quantum Pi — Ağ ve Uygulama Güvenliği İnteraktif Oryantasyon Laboratuvarı">
-    <title>Quantum Pi — CyberLab | Zonguldak</title>
+    <meta name="description" content="Kuantum Pi — Ağ ve Uygulama Güvenliği İnteraktif Oryantasyon Laboratuvarı">
+    <title>Kuantum Pi — CyberLab | Zonguldak</title>
 
     <!-- Temel ve Değişken Stilleri -->
     <link rel="stylesheet" href="styles/variables.css">
@@ -19,6 +19,9 @@
     <link rel="stylesheet" href="styles/components/completion-view.css">
 </head>
 <body>
+    <!-- En Üst İnce İlerleme Ekseni -->
+    <div class="global-progress-bar" id="globalProgressBar" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
+
     <div class="layout-container">
         <!-- Sol Dizin ve İlerleme Paneli -->
         <aside class="sidebar" id="sidebarSection" aria-label="Modül Gezintisi">
@@ -30,16 +33,14 @@
                     </svg>
                 </div>
                 <div class="brand-details">
-                    <span class="brand-title">QUANTUM PI</span>
+                    <span class="brand-title">KUANTUM PI</span>
                     <span class="brand-subtitle">CYBERLAB v1.0</span>
                 </div>
             </header>
 
             <nav class="nav-modules" aria-label="Eğitim Adımları">
                 <span class="section-label" id="moduleNavLabel">LAB MODÜLLERİ</span>
-                <ul class="step-list" id="stepList" aria-labelledby="moduleNavLabel">
-                    <!-- SidebarComponent tarafından dinamik doldurulacaktır -->
-                </ul>
+                <ul class="step-list" id="stepList" aria-labelledby="moduleNavLabel"></ul>
             </nav>
 
             <footer class="sidebar-footer">
@@ -82,9 +83,7 @@
 
                 <!-- Vektörel Şema / Diyagram Alanı -->
                 <figure class="diagram-viewport" id="diagramContainer" aria-label="Teknik Mimari Diyagramı">
-                    <div class="diagram-wrapper" id="diagramWrapper">
-                        <!-- TaskViewerComponent ilgili SVG diyagramını buraya enjekte edecektir -->
-                    </div>
+                    <div class="diagram-wrapper" id="diagramWrapper"></div>
                     <figcaption class="diagram-caption" id="diagramCaption"></figcaption>
                 </figure>
 
@@ -97,13 +96,11 @@
                         </button>
                     </div>
 
-                    <div class="hint-card" id="hintBox" role="region" aria-hidden="true">
-                        <!-- İpucu içeriği dinamik basılır -->
-                    </div>
+                    <div class="hint-card" id="hintBox" role="region" aria-hidden="true"></div>
+                    <div class="options-grid" id="optionsContainer" role="group" aria-label="Seçenekler"></div>
 
-                    <div class="options-grid" id="optionsContainer" role="group" aria-label="Seçenekler">
-                        <!-- Seçenek butonları TerminalComponent tarafından basılır -->
-                    </div>
+                    <!-- Doğrulama Sonrası Teknik Çıkarım Notu -->
+                    <div class="takeaway-card" id="takeawayBox" role="region" aria-live="polite"></div>
 
                     <!-- Terminal / Konsol Geri Bildirim Satırı -->
                     <footer class="console-feedback" aria-live="assertive">
@@ -124,7 +121,7 @@
                 
                 <h2 class="completion-title">Oryantasyon Tamamlandı</h2>
                 <p class="completion-description">
-                    Tüm güvenlik katmanları doğrulandı. Quantum Pi altyapı mimarisi, ağ geçidi filtreleme politikaları ve uygulama koruma pratikleri eksiksiz analiz edildi.
+                    Tüm güvenlik katmanları doğrulandı. Kuantum Pi altyapı mimarisi, ağ geçidi filtreleme politikaları ve uygulama koruma pratikleri eksiksiz analiz edildi.
                 </p>
 
                 <div class="summary-card">
@@ -132,9 +129,7 @@
                         <span>MODÜL TANIMI</span>
                         <span>DURUM</span>
                     </div>
-                    <div class="summary-list" id="summaryList">
-                        <!-- CompletionComponent tarafından dinamik satırlar üretilir -->
-                    </div>
+                    <div class="summary-list" id="summaryList"></div>
                 </div>
 
                 <div class="completion-actions">
@@ -146,7 +141,7 @@
         </main>
     </div>
 
-    <!-- Sistem Giriş Noktası (Native ES6 Module) -->
+    <!-- Sistem Giriş Noktası -->
     <script type="module" src="src/main.js"></script>
 </body>
 </html>
