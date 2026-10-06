@@ -1,0 +1,25 @@
+/**
+ * @file 01-network-ssh.js
+ * @description Modül 01: Uzak Erişim ve Port Kısıtlama Senaryosu
+ */
+
+export const scenario01 = {
+    id: 1,
+    title: "Uzak Erişim ve Port Kısıtlama",
+    category: "AĞ GÜVENLİĞİ",
+    content: `
+        <p><strong>Kuantum Pi</strong> donanımının yönetim ve yapılandırma arayüzü şifrelenmiş tüneller üzerinden yürütülür. Açık bırakılan varsayılan portlar harici tarayıcılara doğrudan saldırı yüzeyi sunar.</p>
+        <p>Sistem güvenliği için yönetim servisinin dinlediği standart port bilinmeli ve WAN (dış internet) erişimine tamamen kapatılarak yalnızca yerel yönetim IP bloğuna izin verilmelidir.</p>
+    `,
+    question: "Kuantum Pi'nin dinlediği standart güvenli kabuk (SSH) portu nedir?",
+    options: [
+        { id: "opt_1_1", text: "Port 21 (FTP)", isCorrect: false },
+        { id: "opt_1_2", text: "Port 22 (SSH)", isCorrect: true },
+        { id: "opt_1_3", text: "Port 23 (Telnet)", isCorrect: false },
+        { id: "opt_1_4", text: "Port 80 (HTTP)", isCorrect: false }
+    ],
+    hint: "Şifresiz Telnet protokolünden (23) bir önceki standart değerdir.",
+    points: 20,
+    diagram: "assets/diagrams/01-ssh-tunnel-topology.svg",
+    diagramCaption: "TOPOLOJİ ŞEMASI: GÜVENLİ SSH YÖNETİM TÜNELİ VE WAN İZOLASYONU"
+};
