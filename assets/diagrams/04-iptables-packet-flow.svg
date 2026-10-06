@@ -1,0 +1,38 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 580 160" width="100%" height="160" fill="none">
+    <style>
+        .mono { font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; font-size: 11px; fill: #111111; }
+        .sub { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; font-size: 10px; fill: #71717a; }
+        .stroke-line { stroke: #111111; stroke-width: 1.2; }
+        .subtle-box { stroke: #e4e4e7" stroke-width: 1; fill: #fafafa; }
+    </style>
+
+    <!-- Fiziksel Ağ Arayüzü (Sol) -->
+    <rect x="20" y="45" width="90" height="70" class="subtle-box" />
+    <text x="65" y="75" text-anchor="middle" class="mono" font-weight="600">NIC: eth0</text>
+    <text x="65" y="92" text-anchor="middle" class="sub">Giriş Paketi</text>
+
+    <!-- Akış Oku -->
+    <line x1="110" y1="80" x2="168" y2="80" class="stroke-line" />
+    <polygon points="170,80 162,76 162,84" fill="#111111" />
+
+    <!-- PREROUTING & Kural Motoru (Merkez) -->
+    <rect x="170" y="30" width="190" height="100" stroke="#111111" stroke-width="1.2" fill="#ffffff" />
+    <text x="265" y="55" text-anchor="middle" class="mono" font-weight="600">IPTABLES: INPUT</text>
+    <line x1="185" y1="65" x2="345" y2="65" stroke="#e4e4e7" stroke-width="1" />
+    <text x="265" y="85" text-anchor="middle" class="mono" font-size="10px">KURAL: -p tcp --dport ...</text>
+    <text x="265" y="102" text-anchor="middle" class="mono" font-size="10px">UYUŞMA: TEHLİKELİ</text>
+
+    <!-- Karar Çatalı: DROP (Yukarı) -->
+    <path d="M 360 65 L 410 42 L 438 42" class="stroke-line" />
+    <polygon points="440,42 432,38 432,46" fill="#111111" />
+    <rect x="440" y="24" width="120" height="36" fill="#111111" />
+    <text x="500" y="41" text-anchor="middle" class="mono" fill="#ffffff" font-weight="700">DROP</text>
+    <text x="500" y="52" text-anchor="middle" font-family="-apple-system, sans-serif" font-size="9px" fill="#d4d4d8">Sessizce Yok Say (0 Yanıt)</text>
+
+    <!-- Karar Çatalı: REJECT / ACCEPT (Aşağı) -->
+    <path d="M 360 95 L 410 118 L 438 118" stroke="#a1a1aa" stroke-width="1.2" stroke-dasharray="3 3" />
+    <polygon points="440,118 432,114 432,122" fill="#a1a1aa" />
+    <rect x="440" y="100" width="120" height="36" class="subtle-box" />
+    <text x="500" y="117" text-anchor="middle" class="mono" fill="#71717a">REJECT / ACCEPT</text>
+    <text x="500" y="128" text-anchor="middle" class="sub">RST Yanıtı veya Kabul</text>
+</svg>

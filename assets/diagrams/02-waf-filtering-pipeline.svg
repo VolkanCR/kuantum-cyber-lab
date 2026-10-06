@@ -1,0 +1,39 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 580 160" width="100%" height="160" fill="none">
+    <style>
+        .mono { font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; font-size: 11px; fill: #111111; }
+        .sub { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; font-size: 10px; fill: #71717a; }
+        .stroke-line { stroke: #111111; stroke-width: 1.2; }
+        .subtle-box { stroke: #e4e4e7; stroke-width: 1; fill: #fafafa; }
+    </style>
+
+    <!-- Gelen İstek Kaynağı (Sol) -->
+    <rect x="20" y="45" width="110" height="70" class="subtle-box" />
+    <text x="75" y="75" text-anchor="middle" class="mono" font-weight="600">BOT / SCRIPTER</text>
+    <text x="75" y="92" text-anchor="middle" class="sub">curl / python-req</text>
+
+    <!-- Akış Oku -->
+    <line x1="130" y1="80" x2="198" y2="80" class="stroke-line" />
+    <polygon points="200,80 192,76 192,84" fill="#111111" />
+
+    <!-- WAF Denetim Katmanı (Merkez) -->
+    <rect x="200" y="25" width="160" height="110" stroke="#111111" stroke-width="1.2" fill="#ffffff" />
+    <text x="280" y="50" text-anchor="middle" class="mono" font-weight="600">WAF INSP KATMANI</text>
+    <line x1="215" y1="60" x2="345" y2="60" stroke="#e4e4e7" stroke-width="1" />
+    <text x="280" y="78" text-anchor="middle" class="mono" font-size="10px">Başlık Analizi</text>
+    <text x="280" y="94" text-anchor="middle" class="mono" font-size="10px">Hız Sınırı (Rate Limit)</text>
+    <text x="280" y="110" text-anchor="middle" class="mono" font-size="10px">İmza Doğrulama</text>
+
+    <!-- Dal 1: 403 Blokaj (Yukarı) -->
+    <path d="M 360 65 L 420 40 L 448 40" class="stroke-line" />
+    <polygon points="450,40 442,36 442,44" fill="#111111" />
+    <rect x="450" y="22" width="110" height="36" class="subtle-box" stroke="#111111" />
+    <text x="505" y="38" text-anchor="middle" class="mono" font-weight="700">403 FORBIDDEN</text>
+    <text x="505" y="51" text-anchor="middle" class="sub">Erişim Reddedildi</text>
+
+    <!-- Dal 2: 200 Doğrulanmış İstek (Aşağı) -->
+    <path d="M 360 95 L 420 120 L 448 120" stroke="#a1a1aa" stroke-width="1.2" stroke-dasharray="3 3" />
+    <polygon points="450,120 442,116 442,124" fill="#a1a1aa" />
+    <rect x="450" y="102" width="110" height="36" class="subtle-box" />
+    <text x="505" y="118" text-anchor="middle" class="mono" fill="#71717a">200 OK</text>
+    <text x="505" y="131" text-anchor="middle" class="sub">Uygulama Sunucusu</text>
+</svg>

@@ -1,0 +1,136 @@
+/* --- Ana Çevreleyici Kapsayıcı --- */
+.layout-container {
+    display: flex;
+    max-width: var(--layout-max-width);
+    width: 100%;
+    min-height: 100vh;
+    margin: 0 auto;
+    padding: var(--space-12) var(--space-6);
+    position: relative;
+}
+
+/* --- Sol Dizin ve Modül Menüsü Sütunu --- */
+.sidebar {
+    width: var(--sidebar-width);
+    flex-shrink: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding-right: var(--space-6);
+    position: sticky;
+    top: var(--space-12);
+    height: calc(100vh - (var(--space-12) * 2));
+}
+
+/* --- Mimari Dikey Ayrıcı Çizgi --- */
+.vertical-axis {
+    width: var(--axis-width);
+    background-color: var(--color-line);
+    flex-shrink: 0;
+    margin: 0 var(--space-8);
+    position: relative;
+}
+
+/* Mimari çizginin üst ve alt sınırlarına minimalist teknik işaretler */
+.vertical-axis::before,
+.vertical-axis::after {
+    content: "";
+    position: absolute;
+    width: 5px;
+    height: 1px;
+    background-color: var(--color-line-dark);
+    left: -2px;
+}
+
+.vertical-axis::before {
+    top: 0;
+}
+
+.vertical-axis::after {
+    bottom: 0;
+}
+
+/* --- Sağ Ana Çalışma Alanı --- */
+.main-workspace {
+    flex: 1;
+    min-width: 0; /* Flex altındaki taşmaları önler */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding-left: var(--space-6);
+}
+
+.task-container,
+.completion-view {
+    max-width: var(--workspace-max-width);
+    width: 100%;
+    margin: 0 auto;
+}
+
+/* --- Duyarlı Tasarım (Responsive Media Queries) --- */
+
+/* Tablet Görünümü */
+@media (max-width: 900px) {
+    .layout-container {
+        padding: var(--space-8) var(--space-4);
+    }
+
+    .sidebar {
+        width: 200px;
+        padding-right: var(--space-4);
+    }
+
+    .vertical-axis {
+        margin: 0 var(--space-4);
+    }
+
+    .main-workspace {
+        padding-left: var(--space-4);
+    }
+}
+
+/* Mobil Görünüm (Dikey İstifleme) */
+@media (max-width: 720px) {
+    .layout-container {
+        flex-direction: column;
+        padding: var(--space-6) var(--space-4);
+        min-height: auto;
+    }
+
+    .sidebar {
+        width: 100%;
+        position: static;
+        height: auto;
+        padding-right: 0;
+        margin-bottom: var(--space-8);
+        gap: var(--space-6);
+    }
+
+    /* Dikey ayrıcı çizgi mobilde yatay ayrıcıya dönüşür */
+    .vertical-axis {
+        width: 100%;
+        height: var(--axis-width);
+        margin: 0 0 var(--space-8) 0;
+    }
+
+    .vertical-axis::before,
+    .vertical-axis::after {
+        width: 1px;
+        height: 5px;
+        top: -2px;
+    }
+
+    .vertical-axis::before {
+        left: 0;
+    }
+
+    .vertical-axis::after {
+        left: auto;
+        right: 0;
+    }
+
+    .main-workspace {
+        padding-left: 0;
+        justify-content: flex-start;
+    }
+}

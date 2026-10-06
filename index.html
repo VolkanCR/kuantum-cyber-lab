@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="description" content="Quantum Pi — Ağ ve Uygulama Güvenliği İnteraktif Oryantasyon Laboratuvarı">
+    <title>Quantum Pi — CyberLab | Zonguldak</title>
+
+    <!-- Temel ve Değişken Stilleri -->
+    <link rel="stylesheet" href="styles/variables.css">
+    <link rel="stylesheet" href="styles/base.css">
+    <link rel="stylesheet" href="styles/layout.css">
+
+    <!-- Bileşen Stilleri -->
+    <link rel="stylesheet" href="styles/components/sidebar.css">
+    <link rel="stylesheet" href="styles/components/task-view.css">
+    <link rel="stylesheet" href="styles/components/interactive-zone.css">
+    <link rel="stylesheet" href="styles/components/completion-view.css">
+</head>
+<body>
+    <div class="layout-container">
+        <!-- Sol Dizin ve İlerleme Paneli -->
+        <aside class="sidebar" id="sidebarSection" aria-label="Modül Gezintisi">
+            <header class="brand-container">
+                <div class="brand-mark" aria-hidden="true">
+                    <svg width="32" height="48" viewBox="0 0 32 48" class="geometric-logo" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <line x1="16" y1="0" x2="16" y2="48" stroke="currentColor" stroke-width="1.2" />
+                        <circle cx="16" cy="24" r="14" stroke="currentColor" stroke-width="1.2" />
+                    </svg>
+                </div>
+                <div class="brand-details">
+                    <span class="brand-title">QUANTUM PI</span>
+                    <span class="brand-subtitle">CYBERLAB v1.0</span>
+                </div>
+            </header>
+
+            <nav class="nav-modules" aria-label="Eğitim Adımları">
+                <span class="section-label" id="moduleNavLabel">LAB MODÜLLERİ</span>
+                <ul class="step-list" id="stepList" aria-labelledby="moduleNavLabel">
+                    <!-- SidebarComponent tarafından dinamik doldurulacaktır -->
+                </ul>
+            </nav>
+
+            <footer class="sidebar-footer">
+                <div class="score-card" aria-live="polite">
+                    <span class="score-caption">TOPLAM SKOR</span>
+                    <div class="score-display">
+                        <span class="score-num" id="scoreDisplay">0</span>
+                        <span class="score-separator">/</span>
+                        <span class="score-total" id="totalScoreDisplay">100</span>
+                    </div>
+                </div>
+                <div class="action-card">
+                    <button type="button" class="btn-text-action" id="resetBtn" title="Tüm laboratuvar oturumunu sıfırla">
+                        SIFIRLA
+                    </button>
+                </div>
+            </footer>
+        </aside>
+
+        <!-- Mimari Dikey Eksen -->
+        <div class="vertical-axis" aria-hidden="true"></div>
+
+        <!-- Ana Görev ve İnceleme Alanı -->
+        <main class="main-workspace" id="mainWorkspace" role="main">
+            <!-- Aktif Senaryo Görünümü -->
+            <article class="task-container" id="taskContainer" aria-live="polite">
+                <header class="task-header">
+                    <div class="task-meta">
+                        <span class="meta-index" id="taskIndex" aria-label="Görev Numarası">--</span>
+                        <span class="meta-separator" aria-hidden="true">/</span>
+                        <span class="meta-category" id="taskCategory">YÜKLENİYOR</span>
+                    </div>
+                    <h1 class="task-title" id="taskTitle">Laboratuvar Modülü Hazırlanıyor...</h1>
+                </header>
+
+                <!-- Açıklama ve Teori Metni -->
+                <section class="task-content" id="taskContent">
+                    <p class="placeholder-text">Sistem parametreleri ve laboratuvar yönergeleri yükleniyor...</p>
+                </section>
+
+                <!-- Vektörel Şema / Diyagram Alanı -->
+                <figure class="diagram-viewport" id="diagramContainer" aria-label="Teknik Mimari Diyagramı">
+                    <div class="diagram-wrapper" id="diagramWrapper">
+                        <!-- TaskViewerComponent ilgili SVG diyagramını buraya enjekte edecektir -->
+                    </div>
+                    <figcaption class="diagram-caption" id="diagramCaption"></figcaption>
+                </figure>
+
+                <!-- Soru ve Etkileşim Alanı -->
+                <section class="interactive-zone" id="interactiveZone" aria-label="Pratik Değerlendirme">
+                    <div class="question-header">
+                        <p class="question-prompt" id="questionText">Soru yönergesi bekleniyor...</p>
+                        <button type="button" class="btn-hint" id="hintToggleBtn" aria-expanded="false" aria-controls="hintBox">
+                            İPUCU
+                        </button>
+                    </div>
+
+                    <div class="hint-card" id="hintBox" role="region" aria-hidden="true">
+                        <!-- İpucu içeriği dinamik basılır -->
+                    </div>
+
+                    <div class="options-grid" id="optionsContainer" role="group" aria-label="Seçenekler">
+                        <!-- Seçenek butonları TerminalComponent tarafından basılır -->
+                    </div>
+
+                    <!-- Terminal / Konsol Geri Bildirim Satırı -->
+                    <footer class="console-feedback" aria-live="assertive">
+                        <span class="console-prefix">></span>
+                        <span class="console-log" id="statusLine">Sistem hazır. Seçim bekleniyor...</span>
+                    </footer>
+                </section>
+            </article>
+
+            <!-- Oryantasyon Başarı Ekranı -->
+            <section class="completion-view" id="completionContainer" role="region" aria-label="Laboratuvar Tamamlama Raporu" style="display: none;">
+                <div class="completion-glyph" aria-hidden="true">
+                    <svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <circle cx="24" cy="24" r="22" stroke="currentColor" stroke-width="1.5" />
+                        <path d="M16 24L22 30L32 18" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+                    </svg>
+                </div>
+                
+                <h2 class="completion-title">Oryantasyon Tamamlandı</h2>
+                <p class="completion-description">
+                    Tüm güvenlik katmanları doğrulandı. Quantum Pi altyapı mimarisi, ağ geçidi filtreleme politikaları ve uygulama koruma pratikleri eksiksiz analiz edildi.
+                </p>
+
+                <div class="summary-card">
+                    <div class="summary-header">
+                        <span>MODÜL TANIMI</span>
+                        <span>DURUM</span>
+                    </div>
+                    <div class="summary-list" id="summaryList">
+                        <!-- CompletionComponent tarafından dinamik satırlar üretilir -->
+                    </div>
+                </div>
+
+                <div class="completion-actions">
+                    <button type="button" class="btn-outline-action" id="restartLabBtn">
+                        LABORATUVARI YENİDEN BAŞLAT
+                    </button>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <!-- Sistem Giriş Noktası (Native ES6 Module) -->
+    <script type="module" src="src/main.js"></script>
+</body>
+</html>

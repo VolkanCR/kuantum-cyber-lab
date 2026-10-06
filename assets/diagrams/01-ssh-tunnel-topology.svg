@@ -1,0 +1,40 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 580 160" width="100%" height="160" fill="none">
+    <style>
+        .mono { font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; font-size: 11px; fill: #111111; }
+        .sub { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; font-size: 10px; fill: #71717a; }
+        .stroke-line { stroke: #111111; stroke-width: 1.2; }
+        .dashed-line { stroke: #a1a1aa; stroke-width: 1.2; stroke-dasharray: 4 3; }
+        .subtle-box { stroke: #e4e4e7; stroke-width: 1; fill: #fafafa; }
+    </style>
+
+    <!-- Operatör İstasyonu (Sol Düğüm) -->
+    <rect x="20" y="35" width="120" height="90" class="subtle-box" />
+    <text x="80" y="65" text-anchor="middle" class="mono" font-weight="600">OPERATÖR</text>
+    <text x="80" y="82" text-anchor="middle" class="sub">Yönetim İstemcisi</text>
+    <text x="80" y="102" text-anchor="middle" class="mono" font-size="9px">IP: 192.168.1.105</text>
+
+    <!-- Güvenli Tünel Bağlantı Hattı (Merkez) -->
+    <line x1="140" y1="80" x2="240" y2="80" class="stroke-line" />
+    <circle cx="140" cy="80" r="3" fill="#111111" />
+    
+    <!-- Tünel Kapsayıcısı -->
+    <rect x="240" y="55" width="100" height="50" stroke="#111111" stroke-width="1.2" stroke-dasharray="3 2" fill="#ffffff" />
+    <text x="290" y="78" text-anchor="middle" class="mono" font-weight="600">SSH TÜNELİ</text>
+    <text x="290" y="93" text-anchor="middle" class="mono" font-size="10px">PORT 22 / TCP</text>
+
+    <!-- Bağlantı Eksen Oku -->
+    <line x1="340" y1="80" x2="438" y2="80" class="stroke-line" />
+    <polygon points="440,80 432,76 432,84" fill="#111111" />
+
+    <!-- Kuantum Pi Cihazı (Sağ Düğüm) -->
+    <rect x="440" y="25" width="120" height="110" class="subtle-box" stroke="#111111" />
+    <text x="500" y="52" text-anchor="middle" class="mono" font-weight="600">KUANTUM PI</text>
+    <text x="500" y="68" text-anchor="middle" class="sub">Güvenlik Ağ Geçidi</text>
+    <line x1="455" y1="78" x2="545" y2="78" stroke="#e4e4e7" stroke-width="1" />
+    <text x="500" y="95" text-anchor="middle" class="mono" font-size="10px">DINLEME: :22</text>
+    <text x="500" y="112" text-anchor="middle" class="mono" font-size="9px">ERISIM: KISITLI</text>
+
+    <!-- Dış Ağ Blokaj Uyarısı -->
+    <line x1="290" y1="120" x2="290" y2="140" class="dashed-line" />
+    <text x="290" y="152" text-anchor="middle" class="sub">WAN / Açık İnternet Erişimi Blokeli</text>
+</svg>

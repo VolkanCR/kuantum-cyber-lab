@@ -1,0 +1,39 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 580 160" width="100%" height="160" fill="none">
+    <style>
+        .mono { font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; font-size: 11px; fill: #111111; }
+        .sub { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; font-size: 10px; fill: #71717a; }
+        .stroke-line { stroke: #111111; stroke-width: 1.2; }
+        .subtle-box { stroke: #e4e4e7; stroke-width: 1; fill: #fafafa; }
+    </style>
+
+    <!-- Yerel Ağ Cihazları (LAN Segmenti - Sol) -->
+    <rect x="20" y="25" width="120" height="110" class="subtle-box" />
+    <text x="80" y="48" text-anchor="middle" class="mono" font-weight="600">YEREL AĞ (LAN)</text>
+    <line x1="35" y1="58" x2="125" y2="58" stroke="#e4e4e7" stroke-width="1" />
+    <text x="80" y="78" text-anchor="middle" class="mono" font-size="10px">İş İstasyonları</text>
+    <text x="80" y="95" text-anchor="middle" class="mono" font-size="10px">IoT / Cihazlar</text>
+    <text x="80" y="112" text-anchor="middle" class="sub">192.168.1.0/24</text>
+
+    <!-- Çıkış Trafik Yönlendirmesi -->
+    <line x1="140" y1="80" x2="208" y2="80" class="stroke-line" />
+    <polygon points="210,80 202,76 202,84" fill="#111111" />
+
+    <!-- Varsayılan Ağ Geçidi: Kuantum Pi (Merkez Eksen) -->
+    <rect x="210" y="20" width="170" height="120" stroke="#111111" stroke-width="1.5" fill="#ffffff" />
+    <text x="295" y="45" text-anchor="middle" class="mono" font-weight="700">DEFAULT GATEWAY</text>
+    <text x="295" y="60" text-anchor="middle" class="mono" font-size="10px">[KUANTUM PI]</text>
+    <line x1="225" y1="70" x2="365" y2="70" stroke="#e4e4e7" stroke-width="1" />
+    <text x="295" y="88" text-anchor="middle" class="mono" font-size="10px">IP: 192.168.1.1</text>
+    <text x="295" y="104" text-anchor="middle" class="sub">Tüm Giden/Gelen Paketler</text>
+    <text x="295" y="120" text-anchor="middle" class="sub">Bu Düğümden Süzülür</text>
+
+    <!-- WAN / İnternet Çıkış Oku -->
+    <line x1="380" y1="80" x2="448" y2="80" class="stroke-line" />
+    <polygon points="450,80 442,76 442,84" fill="#111111" />
+
+    <!-- Dış Ağ / WAN / Internet (Sağ) -->
+    <rect x="450" y="35" width="110" height="90" class="subtle-box" />
+    <text x="505" y="68" text-anchor="middle" class="mono" font-weight="600">WAN / INTERNET</text>
+    <text x="505" y="85" text-anchor="middle" class="sub">Dış Ağ Çıkışı</text>
+    <text x="505" y="102" text-anchor="middle" class="mono" font-size="9px">Genel IP / ISP</text>
+</svg>
