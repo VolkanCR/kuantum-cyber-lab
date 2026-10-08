@@ -59,12 +59,8 @@ export class SidebarComponent {
      */
     bindEvents() {
         this.resetBtnEl.addEventListener("click", () => {
-            const confirmed = window.confirm(
-                "Tüm laboratuvar oturumunu ve kazanılan puanları sıfırlamak istediğinize emin misiniz?"
-            );
-            if (confirmed) {
-                this.stateManager.resetSession();
-            }
+            // Uyarı mesajı olmadan doğrudan oturumu sıfırla
+            this.stateManager.resetSession();
         });
     }
 
