@@ -36,7 +36,7 @@ export class TerminalComponent {
 
         /** @type {import('../models/Task.js').Task|null} */
         this.currentTask = null;
-        this.isProcessing = false;
+        this.isCompleted = false;
 
         this.assertDomIntegrity();
         this.init();
@@ -73,7 +73,7 @@ export class TerminalComponent {
 
         this.eventBus.subscribe(APP_CONFIG.EVENTS.SESSION_RESET, () => {
             this.closeHint();
-            this.hideTakeaway();
+            this.hideFeedback();
             this.setConsoleStatus("Sistem sıfırlandı. Seçim bekleniyor...", "");
         });
     }
@@ -103,26 +103,60 @@ export class TerminalComponent {
     }
 
     /**
-     * Teknik çıkarım notunu gösterir.
-     * @param {string} takeawayText
+     * Yanlış cevap seçildiğinde öğretici açıklamayı ekranda sabit tutar.
+     * @param {string} explanationText
      */
-    showTakeaway(takeawayText) {
+    showWrongFeedback(explanationText) {
+        this.takeawayBoxEl.className = "takeaway-card visible state-wrong";
         this.takeawayBoxEl.innerHTML = `
             <div class="takeaway-header">
-                <span aria-hidden="true">✓</span>
-                <span>TEKNİK ÇIKARIM VE ALINAN ÖNLEM</span>
+                <span aria-hidden="true">✕</span>
+                <span>HATALI PARAMETRE — ÖĞRETİCİ ANALİZ</span>
             </div>
-            <div class="takeaway-body">${takeawayText}</div>
+            <div class="takeaway-body">${explanationText}</div>
         `;
-        this.takeawayBoxEl.classList.add("visible");
     }
 
     /**
-     * Teknik çıkarım notunu gizler.
+     * Doğru cevap seçildiğinde teknik çıkarımı ve kullanıcı kontrollü geçiş butonunu gösterir.
+     * @param {string} optionExplanation
+     * @param {string} summaryTakeaway
      */
-    hideTakeaway() {
+    showCorrectTakeaway(optionExplanation, summaryTakeaway) {
+        const isLastTask = this.currentTask && this.currentTask.id === this.tasks.length;
+        const advanceButtonLabel = isLastTask ? "SONUÇ RAPORUNU İNCELE →" : "SONRAKİ MODÜLE İLERLE →";
+
+        this.takeawayBoxEl.className = "takeaway-card visible state-correct";
+        this.takeawayBoxEl.innerHTML = `
+            <div class="takeaway-header">
+                <span aria-hidden="true">✓</span>
+                <span>DOĞRULANDI — TEKNİK ÇIKARIM VE ALINAN ÖNLEM</span>
+            </div>
+            <div class="takeaway-body">
+                <p style="margin-bottom: 0.5rem;">${optionExplanation}</p>
+                <p><strong>Özet:</strong> ${summaryTakeaway}</p>
+            </div>
+            <div class="takeaway-action-bar">
+                <button type="button" class="btn-advance-task" id="advanceTaskBtn">
+                    ${advanceButtonLabel}
+                </button>
+            </div>
+        `;
+
+        const advanceBtn = document.getElementById("advanceTaskBtn");
+        if (advanceBtn) {
+            advanceBtn.addEventListener("click", () => {
+                this.advanceToNextAvailableTask();
+            });
+        }
+    }
+
+    /**
+     * Geri bildirim kartını temizler ve kapatır.
+     */
+    hideFeedback() {
         this.takeawayBoxEl.innerHTML = "";
-        this.takeawayBoxEl.classList.remove("visible");
+        this.takeawayBoxEl.className = "takeaway-card";
     }
 
     /**
@@ -131,8 +165,7 @@ export class TerminalComponent {
      */
     renderInteractiveArea(task) {
         this.closeHint();
-        this.hideTakeaway();
-        this.isProcessing = false;
+        this.hideFeedback();
 
         this.questionTextEl.textContent = task.question;
         this.hintBoxEl.textContent = task.hint;
@@ -161,7 +194,11 @@ export class TerminalComponent {
 
         if (isTaskCompleted) {
             this.setConsoleStatus("— Doğrulandı. Modül tamamlandı.", "success");
-            this.showTakeaway(task.takeaway);
+            const correctOpt = task.options.find(o => o.isCorrect);
+            this.showCorrectTakeaway(
+                correctOpt ? correctOpt.explanation : "",
+                task.takeaway
+            );
         } else {
             this.setConsoleStatus("Seçenek bekleniyor...", "");
         }
@@ -174,9 +211,12 @@ export class TerminalComponent {
      * @param {HTMLButtonElement} buttonEl
      */
     handleOptionSelection(option, buttonEl) {
-        if (this.isProcessing || !this.currentTask) return;
+        if (!this.currentTask) return;
 
-        this.isProcessing = true;
+        // Daha önce seçilmiş başka bir yanlış buton varsa vurgusunu temizle
+        const allOptionButtons = this.optionsContainerEl.querySelectorAll(".option-node");
+        allOptionButtons.forEach(btn => btn.classList.remove("wrong-selected"));
+
         const evaluation = this.validationEngine.evaluateAnswer({
             task: this.currentTask,
             selectedOption: option,
@@ -187,22 +227,17 @@ export class TerminalComponent {
             buttonEl.classList.add("correct");
             this.disableAllOptionButtons();
             this.setConsoleStatus(evaluation.message, "success");
-            this.showTakeaway(this.currentTask.takeaway);
 
-            window.setTimeout(() => {
-                this.isProcessing = false;
-                this.advanceToNextAvailableTask();
-            }, APP_CONFIG.TIMING.SUCCESS_ADVANCE_DELAY_MS + 400);
+            // Doğru cevap çıktısını ekranda tut; süre kısıtı koyma, butonu bekle
+            this.showCorrectTakeaway(option.explanation, this.currentTask.takeaway);
 
         } else {
-            buttonEl.classList.add("wrong");
+            // Tıklanan şıkkı silme, 'wrong-selected' olarak sabit bırak
+            buttonEl.classList.add("wrong-selected");
             this.setConsoleStatus(evaluation.message, "error");
 
-            window.setTimeout(() => {
-                buttonEl.classList.remove("wrong");
-                this.setConsoleStatus("Yeniden deneme bekleniyor...", "");
-                this.isProcessing = false;
-            }, APP_CONFIG.TIMING.WRONG_ANSWER_DELAY_MS);
+            // Farklı bir şık seçilene kadar öğretici açıklamayı ekranda sabit tut
+            this.showWrongFeedback(option.explanation);
         }
     }
 
@@ -218,7 +253,7 @@ export class TerminalComponent {
     }
 
     /**
-     * Tamamlanmamış sıradaki göreve otomatik geçiş yapar.
+     * Kullanıcı butona bastığında sıradaki göreve veya sonuç ekranına geçer.
      * @private
      */
     advanceToNextAvailableTask() {
@@ -227,6 +262,9 @@ export class TerminalComponent {
 
         if (nextTask) {
             this.stateManager.setActiveTask(nextTask.id);
+        } else {
+            // Tüm görevler tamamlandıysa tamamlanma olayını tetikle
+            this.eventBus.publish(APP_CONFIG.EVENTS.LAB_COMPLETED, state);
         }
     }
 

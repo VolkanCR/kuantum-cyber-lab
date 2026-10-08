@@ -11,7 +11,7 @@ export class Task {
      * @param {string} data.category
      * @param {string} data.content
      * @param {string} data.question
-     * @param {Array<{ id: string, text: string, isCorrect: boolean }>} data.options
+     * @param {Array<{ id: string, text: string, isCorrect: boolean, explanation: string }>} data.options
      * @param {string} data.hint
      * @param {number} data.points
      * @param {string} data.diagram
@@ -30,7 +30,8 @@ export class Task {
             data.options.map((opt, index) => Object.freeze({
                 id: opt.id || `opt_${this.id}_${index + 1}`,
                 text: String(opt.text).trim(),
-                isCorrect: Boolean(opt.isCorrect)
+                isCorrect: Boolean(opt.isCorrect),
+                explanation: String(opt.explanation).trim()
             }))
         );
         this.hint = String(data.hint).trim();
@@ -80,6 +81,12 @@ export class Task {
         if (correctOptions.length !== 1) {
             throw new RangeError(`[Task.validate] Modül ${data.id}: Tam olarak 1 adet doğru seçenek (isCorrect: true) olmalıdır.`);
         }
+
+        data.options.forEach((opt, idx) => {
+            if (!opt.explanation || typeof opt.explanation !== "string") {
+                throw new TypeError(`[Task.validate] Modül ${data.id}, Seçenek ${idx + 1}: 'explanation' (öğretici açıklama) alanı zorunludur.`);
+            }
+        });
 
         if (typeof data.points !== "number" || data.points <= 0) {
             throw new RangeError(`[Task.validate] Modül ${data.id}: Puan pozitif bir değer olmalıdır.`);

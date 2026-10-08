@@ -1,4 +1,4 @@
-/* --- Global Üst İlerleme Çubuğu (1px Mimari Eksen) --- */
+/* --- Global Üst İlerleme Çubuğu (2px Mimari Eksen) --- */
 .global-progress-bar {
     position: fixed;
     top: 0;
@@ -96,7 +96,7 @@
     color: var(--color-text-main);
     font-size: var(--text-base);
     text-align: left;
-    transition: all var(--transition-fast);
+    transition: border-color var(--transition-fast), background-color var(--transition-fast);
     position: relative;
 }
 
@@ -113,32 +113,50 @@
     cursor: default;
 }
 
-/* Yanlış Seçenek Durumu */
-.option-node.wrong {
-    border-color: var(--color-state-wrong-line);
-    color: var(--color-state-wrong-text);
+/* Yanlış Seçilmiş Buton (Farklı şık seçilene kadar sabit kalır) */
+.option-node.wrong-selected {
+    border-color: #a1a1aa;
+    background-color: #fafafa;
+    color: #71717a;
     text-decoration: line-through;
-    cursor: default;
 }
 
 .option-node:disabled {
     cursor: default;
 }
 
-/* --- Doğrulama Sonrası Teknik Çıkarım Notu --- */
+/* --- Öğretici Geri Bildirim ve Teknik Çıkarım Kartı --- */
 .takeaway-card {
     display: none;
-    padding: var(--space-4);
+    padding: var(--space-4) var(--space-5);
     background-color: var(--color-bg-secondary);
     border: 1px solid var(--color-line);
-    border-left: 3px solid var(--color-line-dark);
-    font-size: var(--text-sm);
     line-height: var(--leading-normal);
     animation: fadeInTakeaway var(--transition-base);
 }
 
 .takeaway-card.visible {
     display: block;
+}
+
+/* Yanlış Cevap Öğretici Durumu */
+.takeaway-card.state-wrong {
+    border-left: 3px solid #71717a;
+    background-color: #fafafa;
+}
+
+.takeaway-card.state-wrong .takeaway-header {
+    color: #525252;
+}
+
+/* Doğru Cevap Teknik Çıkarım Durumu */
+.takeaway-card.state-correct {
+    border-left: 3px solid var(--color-line-dark);
+    background-color: var(--color-bg-primary);
+}
+
+.takeaway-card.state-correct .takeaway-header {
+    color: var(--color-text-main);
 }
 
 .takeaway-header {
@@ -149,7 +167,6 @@
     font-size: var(--text-2xs);
     font-weight: 700;
     letter-spacing: var(--tracking-wider);
-    color: var(--color-text-main);
     text-transform: uppercase;
     margin-bottom: var(--space-2);
 }
@@ -157,7 +174,40 @@
 .takeaway-body {
     color: var(--color-text-secondary);
     font-size: var(--text-sm);
-    line-height: var(--leading-normal);
+    line-height: var(--leading-relaxed);
+}
+
+.takeaway-body strong {
+    color: var(--color-text-main);
+}
+
+/* Sonraki Göreve İlerleme Aksiyon Butonu */
+.takeaway-action-bar {
+    margin-top: var(--space-4);
+    padding-top: var(--space-3);
+    border-top: 1px solid var(--color-line-subtle);
+    display: flex;
+    justify-content: flex-end;
+}
+
+.btn-advance-task {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-2);
+    padding: var(--space-2) var(--space-4);
+    background-color: var(--color-line-dark);
+    color: var(--color-bg-primary);
+    font-family: var(--font-mono);
+    font-size: var(--text-xs);
+    font-weight: 600;
+    letter-spacing: var(--tracking-wide);
+    border: 1px solid var(--color-line-dark);
+    cursor: pointer;
+    transition: opacity var(--transition-fast);
+}
+
+.btn-advance-task:hover {
+    opacity: 0.85;
 }
 
 @keyframes fadeInTakeaway {

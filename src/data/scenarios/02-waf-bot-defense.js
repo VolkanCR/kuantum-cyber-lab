@@ -13,10 +13,30 @@ export const scenario02 = {
     `,
     question: "Yetkisiz bot erişimi ve WAF engellemesinde dönen 'Forbidden' HTTP kodu hangisidir?",
     options: [
-        { id: "opt_2_1", text: "200 OK", isCorrect: false },
-        { id: "opt_2_2", text: "403 Forbidden", isCorrect: true },
-        { id: "opt_2_3", text: "404 Not Found", isCorrect: false },
-        { id: "opt_2_4", text: "500 Internal Server Error", isCorrect: false }
+        {
+            id: "opt_2_1",
+            text: "200 OK",
+            isCorrect: false,
+            explanation: "200 OK, isteğin başarıyla karşılandığını ve hedeflenen verinin istemciye teslim edildiğini ifade eder; bu bir blokaj yanıtı değildir."
+        },
+        {
+            id: "opt_2_2",
+            text: "403 Forbidden",
+            isCorrect: true,
+            explanation: "403 Forbidden, kaynağın sunucuda var olduğunu ancak istemcinin erişim izninin güvenlik duvarı (WAF) kurallarınca reddedildiğini gösterir."
+        },
+        {
+            id: "opt_2_3",
+            text: "404 Not Found",
+            isCorrect: false,
+            explanation: "404 Not Found, talep edilen kaynağın sunucuda fiziksel veya mantıksal olarak bulunmadığını belirtir; güvenlik engellemesi anlamına gelmez."
+        },
+        {
+            id: "opt_2_4",
+            text: "500 Internal Server Error",
+            isCorrect: false,
+            explanation: "500 kodu sunucu tarafındaki bir kodlama veya çökme hatasını gösterir; güvenlik duvarının planlı bir erişim kısıtlama kararı değildir."
+        }
     ],
     hint: "İstemci hataları (4xx) sınıfında yer alır; kaynağın var olduğunu ancak erişim izninizin bulunmadığını belirtir.",
     points: 20,

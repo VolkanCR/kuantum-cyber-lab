@@ -13,10 +13,30 @@ export const scenario01 = {
     `,
     question: "Kuantum Pi'nin dinlediği standart güvenli kabuk (SSH) portu nedir?",
     options: [
-        { id: "opt_1_1", text: "Port 21 (FTP)", isCorrect: false },
-        { id: "opt_1_2", text: "Port 22 (SSH)", isCorrect: true },
-        { id: "opt_1_3", text: "Port 23 (Telnet)", isCorrect: false },
-        { id: "opt_1_4", text: "Port 80 (HTTP)", isCorrect: false }
+        {
+            id: "opt_1_1",
+            text: "Port 21 (FTP)",
+            isCorrect: false,
+            explanation: "Port 21 dosya aktarımı (FTP) için ayrılmıştır. Şifrelenmiş interaktif kabuk erişimi sunmaz ve kimlik bilgilerini düz metin ilettiği için güvenli yönetimde kullanılmaz."
+        },
+        {
+            id: "opt_1_2",
+            text: "Port 22 (SSH)",
+            isCorrect: true,
+            explanation: "Standart güvenli kabuk (SSH) portudur. Kriptografik tünel üzerinden kimlik doğrulama ve uzaktan komut yürütme sağlar."
+        },
+        {
+            id: "opt_1_3",
+            text: "Port 23 (Telnet)",
+            isCorrect: false,
+            explanation: "Port 23 eski Telnet protokolüdür. Tüm oturum trafiğini ve parolaları şifresiz aktardığı için modern güvenlik standartlarında kesinlikle engellenmelidir."
+        },
+        {
+            id: "opt_1_4",
+            text: "Port 80 (HTTP)",
+            isCorrect: false,
+            explanation: "Port 80 şifrelenmemiş web sunucu trafiği içindir. Donanım yönetim konsolu veya güvenli kabuk protokolüyle ilişkisi yoktur."
+        }
     ],
     hint: "Şifresiz Telnet protokolünden (23) bir önceki standart değerdir.",
     points: 20,

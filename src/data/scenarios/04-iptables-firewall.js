@@ -13,10 +13,30 @@ export const scenario04 = {
     `,
     question: "Saldırgana hiçbir yanıt vermeden gelen paketi sessizce yok sayan iptables hedefi nedir?",
     options: [
-        { id: "opt_4_1", text: "ACCEPT", isCorrect: false },
-        { id: "opt_4_2", text: "REJECT", isCorrect: false },
-        { id: "opt_4_3", text: "DROP", isCorrect: true },
-        { id: "opt_4_4", text: "LOG", isCorrect: false }
+        {
+            id: "opt_4_1",
+            text: "ACCEPT",
+            isCorrect: false,
+            explanation: "ACCEPT kuralı gelen paketi onaylayarak çekirdekten hedef servise geçişine izin verir; paketi engellemez."
+        },
+        {
+            id: "opt_4_2",
+            text: "REJECT",
+            isCorrect: false,
+            explanation: "REJECT paketi engeller ancak saldırgana açıkça 'bağlantı reddedildi' (TCP RST veya ICMP Unreachable) yanıtı yollar. Bu da hedefte aktif bir cihaz olduğunu saldırgana kanıtlar."
+        },
+        {
+            id: "opt_4_3",
+            text: "DROP",
+            isCorrect: true,
+            explanation: "DROP hedefi paketi hiçbir geri bildirim göndermeden sessizce imha eder. Karşı taraf zaman aşımına uğrayarak cihazın aktif olup olmadığını belirleyemez."
+        },
+        {
+            id: "opt_4_4",
+            text: "LOG",
+            isCorrect: false,
+            explanation: "LOG hedefi sadece paketin üst bilgilerini sistem günlüklerine (syslog) kaydeder; paketin geçişini durdurmaz veya düşürmez."
+        }
     ],
     hint: "Paketi sıfır yanıtla yok sayarak karşı tarafı TCP zaman aşımına (timeout) uğratan eylemdir.",
     points: 20,

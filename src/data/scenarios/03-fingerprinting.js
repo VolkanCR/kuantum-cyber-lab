@@ -13,10 +13,30 @@ export const scenario03 = {
     `,
     question: "Tarayıcı motoru ve işletim sistemi bilgisini taşıyan standart HTTP başlığı nedir?",
     options: [
-        { id: "opt_3_1", text: "Content-Type", isCorrect: false },
-        { id: "opt_3_2", text: "Host", isCorrect: false },
-        { id: "opt_3_3", text: "User-Agent", isCorrect: true },
-        { id: "opt_3_4", text: "Accept-Encoding", isCorrect: false }
+        {
+            id: "opt_3_1",
+            text: "Content-Type",
+            isCorrect: false,
+            explanation: "Content-Type, istek veya yanıt gövdesinde (body) taşınan verinin MIME formatını (ör. application/json, text/html) tanımlar; istemci donanım/tarayıcı bilgisi taşımaz."
+        },
+        {
+            id: "opt_3_2",
+            text: "Host",
+            isCorrect: false,
+            explanation: "Host başlığı isteğin gönderildiği hedef alan adını (domain/IP) belirtir; isteği yapan istemcinin kimliği hakkında bilgi vermez."
+        },
+        {
+            id: "opt_3_3",
+            text: "User-Agent",
+            isCorrect: true,
+            explanation: "User-Agent başlığı, istemcinin tarayıcı çekirdeğini (Chrome, Firefox vb.), işletim sistemini ve mimarisini taşıyarak WAF'ın bot ayrımı yapmasını sağlar."
+        },
+        {
+            id: "opt_3_4",
+            text: "Accept-Encoding",
+            isCorrect: false,
+            explanation: "Accept-Encoding başlığı istemcinin anlayabildiği veri sıkıştırma algoritmalarını (gzip, br, deflate) belirtir; kimlik parmak izi görevi görmez."
+        }
     ],
     hint: "Kullanıcı temsilcisi anlamına gelen temel HTTP başlığıdır.",
     points: 20,
